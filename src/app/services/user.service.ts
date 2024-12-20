@@ -6,19 +6,27 @@ import { User } from '../../types';
   providedIn: 'root'
 })
 export class UserService {
+  private storageKey = 'user';
   private currentUserSubject = new BehaviorSubject<User | null>(null);
-  currentUser$ = this.currentUserSubject.asObservable();
-  isLoggedIn$ = this.currentUser$.pipe(map(user => !!user));
+  public currentUser$ = this.currentUserSubject.asObservable();
+  public isLoggedIn$ = this.currentUser$.pipe(map(user => !!user));
 
-  constructor() {}
+  constructor() {
+    const user = sessionStorage.getItem(this.storageKey);
+    if (user) {
+      this.currentUserSubject.next(JSON.parse(user));
+    }
+  }
 
   login(user: User) {
     this.currentUserSubject.next(user);
+    sessionStorage.setItem(this.storageKey, JSON.stringify(user));
   }
 
   logout() {
     // Logic to handle user logout
     this.currentUserSubject.next(null);
+    sessionStorage.removeItem(this.storageKey);
   }
 
   getCurrentUser(): User | null {
