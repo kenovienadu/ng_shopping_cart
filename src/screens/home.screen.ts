@@ -4,10 +4,11 @@ import { ProductItem } from "../types";
 import { products } from "../data";
 import { ProductCardComponent } from "../components/product-card.component";
 import { FormsModule } from "@angular/forms";
+import { SignupModalComponent } from "../components/signup.component";
 
 
 @Component({
-  imports: [CommonModule, ProductCardComponent, FormsModule],
+  imports: [CommonModule, ProductCardComponent, FormsModule, SignupModalComponent],
   selector: 'home-screen',
   template: `
     <section class="contained home_container pb-[100px]">
@@ -47,6 +48,8 @@ import { FormsModule } from "@angular/forms";
         <p class="text-lg font-semibold text-center mt-12">No products found</p>
       </ng-template>
     </section>
+
+    <signup-modal *ngIf="showSignupModal" ></signup-modal>
   `,
   styles: [`
     .home_container {
@@ -58,6 +61,7 @@ export class HomeScreenComponent implements OnInit {
   availableProducts: ProductItem[] = [];
   sortBy = 'name';
   searchQuery = '';
+  showSignupModal = false;
 
   sortingOptions = [
     { label: 'Name', value: 'name' },
