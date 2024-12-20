@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
     <section class="navbar_container">
       <nav class="navbar contained">
         <div class="navbar-logo font-semibold">
-          <a href="#" class="text-blue-800 text-2xl">Shopi Market</a>
+          <a href="#" class="text-2xl">Shopi Market</a>
         </div>
         <div>
           <div class="cart_wrapper bg-gray-100">
