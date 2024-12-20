@@ -8,10 +8,19 @@ import { Router } from '@angular/router';
   selector: 'navbar',
   template: `
     <section class="navbar_container">
-      <nav class="navbar contained">
+      <nav class="navbar px-2 md:px-0 py-3 contained">
         <div class="navbar-logo font-semibold">
-          <a href="#" class="text-2xl">Dextro Market</a>
+          <a href="#" class="text-2xl md:text-4xl">Dextro Market</a>
         </div>
+
+        <div class="hidden md:flex text-2xl gap-8">
+          <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+          <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://pinterest.com" target="_blank"><i class="fa-brands fa-pinterest"></i></a>
+          <a href="https://snapchat.com" target="_blank"><i class="fa-brands fa-snapchat"></i></a>
+        </div>
+
         <div>
           <button (click)="openCartPage()" class="cart_wrapper bg-gray-100 px-3 rounded">
             <i class="fa-solid fa-cart-shopping"></i>
@@ -33,12 +42,10 @@ import { Router } from '@angular/router';
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 0;
     }
 
     .navbar a {
       text-decoration: none;
-      font-size: 2rem;
     }
 
     .cart_wrapper {

@@ -31,10 +31,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
     .modal-content {
       background-color: white;
-      padding: 40px;
+      padding: 30px;
       border-radius: 25px;
       width: 500px;
-      max-width: 100%;
+      max-width: 90%;
       text-align: center;
     }
   `]

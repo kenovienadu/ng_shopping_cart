@@ -13,26 +13,26 @@ import { CartService } from "../services/cart.service";
   imports: [CommonModule, ProductCardComponent, FormsModule, SignupModalComponent],
   selector: 'home-screen',
   template: `
-    <section class="contained py-[100px]">
+    <section class="contained px-2 md:px-0 py-[30px] md:py-[100px]">
       <div class="info">
         <h1 class="text-2xl font-medium capitalize">
           {{welcomeText}}
         </h1>
-        <div class="flex justify-between items-center mt-6">
+        <div class="md:flex justify-between items-center mt-6">
           <div>
             <!-- Search Input -->
-            <input [(ngModel)]="searchQuery" class="w-[500px] h-[48px] px-2 border outline-none" placeholder="Type to Search Products" />
+            <input [(ngModel)]="searchQuery" class="w-full md:w-[500px] h-[48px] px-2 border outline-none" placeholder="Type to Search Products" />
             <p *ngIf="searchQuery && filteredProducts.length" class="uppercase mt-2 opacity-60">
               Showing {{filteredProducts.length}} of {{availableProducts.length}} results
             </p>
           </div>
 
           <!-- Sorting Options -->
-          <div class="inline-flex">
+          <div class="grid grid-cols-2 mt-4 md:mt-0 md:inline-flex">
             <button
               (click)="selectSortingOption(option.value)"
               *ngFor="let option of sortingOptions"
-              class="p-2 bg-gray-100 capitalize"
+              class="p-3 bg-gray-100 capitalize text-xs"
               [class.bg-gray-800]="option.value === sortBy"
               [class.text-white]="option.value === sortBy"
             >
@@ -43,7 +43,7 @@ import { CartService } from "../services/cart.service";
       </div>
 
       <!-- Product Cards -->
-      <div *ngIf="filteredProducts.length; else empty_state" class="grid grid-cols-4 gap-6 mt-12" >
+      <div *ngIf="filteredProducts.length; else empty_state" class="md:grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12" >
         <product-card
           *ngFor="let product of filteredProducts"
           [product]="product"
