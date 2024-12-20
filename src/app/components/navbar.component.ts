@@ -24,6 +24,8 @@ import { CommonModule } from '@angular/common';
     .navbar_container {
       background-color: #fff;
       padding: 20px 0;
+      position: sticky;
+      top: 0;
     }
 
     .navbar {

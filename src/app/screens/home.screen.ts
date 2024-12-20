@@ -13,7 +13,7 @@ import { CartService } from "../services/cart.service";
   imports: [CommonModule, ProductCardComponent, FormsModule, SignupModalComponent],
   selector: 'home-screen',
   template: `
-    <section class="contained home_container pb-[100px]">
+    <section class="contained py-[100px]">
       <div class="info">
         <h1 class="text-2xl font-medium">
           {{welcomeText}}
@@ -59,11 +59,6 @@ import { CartService } from "../services/cart.service";
 
     <signup-modal *ngIf="showSignupModal" (close)="showSignupModal = false" ></signup-modal>
   `,
-  styles: [`
-    .home_container {
-      padding-top: 30px;
-    }
-  `]
 })
 export class HomeScreenComponent implements OnInit {
   constructor(
