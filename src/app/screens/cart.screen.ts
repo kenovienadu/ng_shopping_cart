@@ -3,9 +3,10 @@ import { CartService } from '../services/cart.service';
 import { ProductItem } from '../../types';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { OrderCompletedModalComponent } from '../components/order-completed.component';
 
 @Component({
-  imports: [CommonModule],
+  imports: [CommonModule, OrderCompletedModalComponent],
   template: `
     <section class="cart-container contained py-[100px]">
       <h2 class="mb-4 text-2xl">Your Cart ({{cartItems.length}})</h2>
@@ -53,6 +54,8 @@ import { Router } from '@angular/router';
       </ng-template>
 
     </section>
+
+    <order-completed-modal *ngIf="showCompletedModal" (close)="openProductsPage()" ></order-completed-modal>
   `,
   styles: [`
     button.remove {
@@ -64,6 +67,7 @@ import { Router } from '@angular/router';
 export class CartScreenComponent implements OnInit {
   cartItems: ProductItem[] = [];
   total: number = 0;
+  showCompletedModal = false;
 
   constructor(private cartService: CartService, private router: Router) {}
 
@@ -83,6 +87,7 @@ export class CartScreenComponent implements OnInit {
   }
 
   handleCheckout() {
-    // Logic to handle checkout
+    this.cartService.clearCart();
+    this.showCompletedModal = true;
   }
 }

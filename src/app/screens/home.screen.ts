@@ -15,7 +15,7 @@ import { CartService } from "../services/cart.service";
   template: `
     <section class="contained py-[100px]">
       <div class="info">
-        <h1 class="text-2xl font-medium">
+        <h1 class="text-2xl font-medium capitalize">
           {{welcomeText}}
         </h1>
         <div class="flex justify-between items-center mt-6">
