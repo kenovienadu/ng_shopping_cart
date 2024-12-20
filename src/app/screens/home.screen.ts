@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { ProductItem } from "../types";
-import { products } from "../data";
+import { ProductItem } from "../../types";
+import { products } from "../../data";
 import { ProductCardComponent } from "../components/product-card.component";
 import { FormsModule } from "@angular/forms";
 import { SignupModalComponent } from "../components/signup.component";
