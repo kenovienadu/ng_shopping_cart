@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [CommonModule],
@@ -12,7 +13,7 @@ import { CommonModule } from '@angular/common';
           <a href="#" class="text-2xl">Dextro Market</a>
         </div>
         <div>
-          <button class="cart_wrapper bg-gray-100 px-3 rounded">
+          <button (click)="openCartPage()" class="cart_wrapper bg-gray-100 px-3 rounded">
             <i class="fa-solid fa-cart-shopping"></i>
             {{ cartTotal | currency }}
           </button>
@@ -56,6 +57,11 @@ export class NavbarComponent {
   }
 
   constructor(
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) {}
+
+  openCartPage() {
+    this.router.navigate(['/cart']);
+  }
 }
