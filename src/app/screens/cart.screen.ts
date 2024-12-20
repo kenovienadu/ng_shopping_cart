@@ -9,11 +9,18 @@ import { OrderCompletedModalComponent } from '../components/order-completed.comp
   imports: [CommonModule, OrderCompletedModalComponent],
   template: `
     <section class="cart-container contained py-[100px]">
-      <h2 class="mb-4 text-2xl">Your Cart ({{cartItems.length}})</h2>
+      <div class="flex justify-between items-center mb-4 pb-4 border-b">
+        <h2 class="text-2xl">Your Cart ({{cartItems.length}})</h2>
+        <button class="" (click)="clearCart()" >Clear All</button>
+      </div>
+
       <ng-container *ngIf="cartItems.length > 0; else emptyCart">
-        <div *ngFor="let item of cartItems" class="bg-white p-12 rounded mb-3">
+        <div *ngFor="let item of cartItems" class="bg-white p-12 rounded mb-3 shadow-md">
           <div class="flex justify-between items-center">
-            <span>{{ item.name }}</span>
+            <div class="flex items-center gap-2">
+              <img class="w-[100px] h-[100px] object-cover rounded shadow-sm" [src]="item.imageUrl" alt="Product Image" />
+              <span>{{ item.name }}</span>
+            </div>
 
             <div class="flex items-center">
               <span>{{ item.price | currency }}</span>
@@ -80,6 +87,10 @@ export class CartScreenComponent implements OnInit {
 
   removeFromCart(productId: string) {
     this.cartService.removeFromCart(productId);
+  }
+
+  clearCart() {
+    this.cartService.clearCart();
   }
 
   openProductsPage() {

@@ -94,7 +94,8 @@ export class HomeScreenComponent implements OnInit {
 
   ngOnInit(): void {
     const defaultImageUrl = "https://res.cloudinary.com/dk07kf3yl/image/upload/v1733673243/temp/item-placeholder_pr2sx5.webp";
-    this.availableProducts = products.map(product => ({...product, imageUrl: defaultImageUrl}));
+    // this.availableProducts = products.map(product => ({...product, imageUrl: defaultImageUrl}));
+    this.availableProducts = [...products];
     this.sortProducts();
   }
 
