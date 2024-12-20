@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UserService } from '../services/user.service';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -20,10 +21,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
           <div class="form-group">
             <label for="email">Email*</label>
             <input class="border h-[45px] outline-none" type="email" id="email" formControlName="email" required>
-          </div>
-          <div class="form-group">
-            <label for="password">Password*</label>
-            <input class="border h-[45px] outline-none" type="password" id="password" formControlName="password" required>
           </div>
           <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
         </form>
@@ -94,24 +91,29 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class SignupModalComponent implements OnInit {
   signupForm: FormGroup;
+  @Output() close = new EventEmitter<void>();
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private userService: UserService) {
     this.signupForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {}
 
   closeModal() {
-    // Logic to close the modal
+    this.close.emit();
   }
 
   onSubmit() {
     if (this.signupForm.valid) {
-      console.log('Form submitted', this.signupForm.value);
+      this.userService.login({
+        fullName: this.signupForm.value.fullName,
+        email: this.signupForm.value.email,
+      });
+
+      this.closeModal();
     }
   }
 }

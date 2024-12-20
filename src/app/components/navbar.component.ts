@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { CartService } from '../services/cart.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  imports: [CommonModule],
   selector: 'navbar',
   template: `
     <section class="navbar_container">
@@ -9,9 +12,10 @@ import { Component } from '@angular/core';
           <a href="#" class="text-2xl">Shopi Market</a>
         </div>
         <div>
-          <div class="cart_wrapper bg-gray-100">
+          <button class="cart_wrapper bg-gray-100 px-3 rounded">
             <i class="fa-solid fa-cart-shopping"></i>
-          </div>
+            {{ cartTotal | currency }}
+          </button>
         </div>
       </nav>
     </section>
@@ -35,14 +39,21 @@ import { Component } from '@angular/core';
     }
 
     .cart_wrapper {
-      display: inline-grid;
-      width: 50px;
+      display: inline-flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
       height: 50px;
-      border-radius: 50%;
       place-items: center;
     }
   `]
 })
 export class NavbarComponent {
-  // Add any necessary logic here
+  get cartTotal() {
+    return this.cartService.getTotalPrice();
+  }
+
+  constructor(
+    private cartService: CartService
+  ) {}
 }

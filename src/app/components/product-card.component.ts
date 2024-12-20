@@ -1,6 +1,7 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { ProductItem } from "../../types";
 import { CommonModule } from "@angular/common";
+import { CartService } from "../services/cart.service";
 
 @Component({
   imports: [CommonModule],
@@ -16,7 +17,9 @@ import { CommonModule } from "@angular/common";
 
         <div class="mt-3 flex justify-between items-center">
           <p class="text-lg font-semibold">{{ product.price | currency }}</p>
-          <button class="bg-gray-800 text-white p-2 rounded text-xs">Add to Cart</button>
+          <button (click)="addOrRemoveFromCart()" class="bg-gray-800 text-white p-2 rounded text-xs">
+            {{ isInCart ? 'Remove from Cart' : 'Add to Cart' }}
+          </button>
         </div>
       </div>
     </div>
@@ -24,6 +27,20 @@ import { CommonModule } from "@angular/common";
   styles: [``]
 })
 export class ProductCardComponent {
-  // Add any necessary logic here
   @Input() product: ProductItem | undefined
+  @Output() cartAction = new EventEmitter<string>();
+
+  get isInCart() {
+    if (!this.product) return false;
+    return this.cartService.isInCart(this.product.id);
+  };
+
+  constructor(
+    private cartService: CartService
+  ) {}
+
+  addOrRemoveFromCart() {
+    if (!this.product) return;
+    this.cartAction.emit(this.product.id);
+  }
 }

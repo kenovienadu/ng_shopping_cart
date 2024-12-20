@@ -5,6 +5,8 @@ import { products } from "../../data";
 import { ProductCardComponent } from "../components/product-card.component";
 import { FormsModule } from "@angular/forms";
 import { SignupModalComponent } from "../components/signup.component";
+import { UserService } from "../services/user.service";
+import { CartService } from "../services/cart.service";
 
 
 @Component({
@@ -13,7 +15,9 @@ import { SignupModalComponent } from "../components/signup.component";
   template: `
     <section class="contained home_container pb-[100px]">
       <div class="info">
-        <h1 class="text-2xl font-medium">Welcome to Shopi Market</h1>
+        <h1 class="text-2xl font-medium">
+          {{welcomeText}}
+        </h1>
         <div class="flex justify-between items-center mt-6">
           <div>
             <!-- Search Input -->
@@ -40,7 +44,11 @@ import { SignupModalComponent } from "../components/signup.component";
 
       <!-- Product Cards -->
       <div *ngIf="filteredProducts.length; else empty_state" class="grid grid-cols-4 gap-6 mt-12" >
-        <product-card *ngFor="let product of filteredProducts" [product]="product"></product-card>
+        <product-card
+          *ngFor="let product of filteredProducts"
+          [product]="product"
+          (cartAction)="handleProductCartAction(product)"
+        ></product-card>
       </div>
 
       <!-- Empty State -->
@@ -49,7 +57,7 @@ import { SignupModalComponent } from "../components/signup.component";
       </ng-template>
     </section>
 
-    <signup-modal *ngIf="showSignupModal" ></signup-modal>
+    <signup-modal *ngIf="showSignupModal" (close)="showSignupModal = false" ></signup-modal>
   `,
   styles: [`
     .home_container {
@@ -58,6 +66,11 @@ import { SignupModalComponent } from "../components/signup.component";
   `]
 })
 export class HomeScreenComponent implements OnInit {
+  constructor(
+    private userService: UserService,
+    private cartService: CartService
+  ){}
+
   availableProducts: ProductItem[] = [];
   sortBy = 'name';
   searchQuery = '';
@@ -74,6 +87,14 @@ export class HomeScreenComponent implements OnInit {
     }
 
     return this.availableProducts.filter(product => product.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+  }
+
+  get welcomeText() {
+    if (this.userService.getCurrentUser()) {
+      return `Welcome, ${this.userService.getCurrentUser()?.fullName}`
+    }
+
+    return `Welcome to Shopi Market`;
   }
 
   ngOnInit(): void {
@@ -93,5 +114,19 @@ export class HomeScreenComponent implements OnInit {
   selectSortingOption(option: string) {
     this.sortBy = option;
     this.sortProducts();
+  }
+
+  handleProductCartAction(product: ProductItem) {
+    if (!this.userService.getCurrentUser()) {
+      this.showSignupModal = true;
+      return;
+    }
+
+    if (this.cartService.isInCart(product.id)) {
+      this.cartService.removeFromCart(product.id);
+      return;
+    }
+
+    this.cartService.addToCart(product);
   }
 }
