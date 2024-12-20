@@ -4,12 +4,12 @@ import { Component } from '@angular/core';
   selector: 'navbar',
   template: `
     <section class="navbar_container">
-      <nav class="navbar container">
-        <div class="navbar-logo roboto-bold">
-          <a href="#">Shopi Market</a>
+      <nav class="navbar contained">
+        <div class="navbar-logo font-semibold">
+          <a href="#" class="text-blue-800 text-2xl">Shopi Market</a>
         </div>
         <div>
-          <div class="cart_wrapper">
+          <div class="cart_wrapper bg-gray-100">
             <i class="fa-solid fa-cart-shopping"></i>
           </div>
         </div>
@@ -26,13 +26,12 @@ import { Component } from '@angular/core';
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
+      padding: 10px 0;
     }
 
     .navbar a {
       text-decoration: none;
-      color: #333;
-      font-size: 1.5rem;
+      font-size: 2rem;
     }
 
     .cart_wrapper {
@@ -40,7 +39,6 @@ import { Component } from '@angular/core';
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      background-color: lightgray;
       place-items: center;
     }
   `]
