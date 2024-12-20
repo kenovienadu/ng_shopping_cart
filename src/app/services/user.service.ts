@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { User } from '../../types';
 
 @Injectable({
@@ -8,6 +8,7 @@ import { User } from '../../types';
 export class UserService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
+  isLoggedIn$ = this.currentUser$.pipe(map(user => !!user));
 
   constructor() {}
 

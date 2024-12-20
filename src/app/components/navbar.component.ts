@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
     <section class="navbar_container">
       <nav class="navbar contained">
         <div class="navbar-logo font-semibold">
-          <a href="#" class="text-2xl">Shopi Market</a>
+          <a href="#" class="text-2xl">Dextro Market</a>
         </div>
         <div>
           <button class="cart_wrapper bg-gray-100 px-3 rounded">

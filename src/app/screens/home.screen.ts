@@ -94,7 +94,7 @@ export class HomeScreenComponent implements OnInit {
       return `Welcome, ${this.userService.getCurrentUser()?.fullName}`
     }
 
-    return `Welcome to Shopi Market`;
+    return `Welcome to Dextro Market`;
   }
 
   ngOnInit(): void {

@@ -72,15 +72,11 @@ import { UserService } from '../services/user.service';
     button {
       width: 100%;
       padding: 10px;
-      background-color: #007bff;
+      background-color: black;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
     }
 
     button:disabled {
