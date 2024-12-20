@@ -7,3 +7,8 @@ export type ProductItem = {
   inStock: boolean;
   inCart: boolean
 }
+
+export type User = {
+  fullName: string;
+  email: string;
+}
