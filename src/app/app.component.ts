@@ -8,10 +8,7 @@ import { NavbarComponent } from '../components/navbar.component';
   template: `
     <navbar></navbar>
     <router-outlet />
-  `,
-  styles: [`
-
-  `]
+  `
 })
 export class AppComponent {
   title = 'ng_shopping_cart';
